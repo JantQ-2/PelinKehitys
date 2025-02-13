@@ -43,6 +43,29 @@
             {
                 return pituus;
             }
+
+            public float LaskeHinta()
+            {
+                float kärjenHinta = kärki switch
+                {
+                    Kärjet.Puu => 3,
+                    Kärjet.Teräs => 5,
+                    Kärjet.Timantti => 50,
+                    _ => 0
+                };
+
+                float peränHinta = perä switch
+                {
+                    Perä.Lehti => 0,
+                    Perä.Kanansulka => 1,
+                    Perä.Kotkansulka => 5,
+                    _ => 0
+                };
+
+                float varrenHinta = pituus * 0.05f;
+
+                return kärjenHinta + peränHinta + varrenHinta;
+            }
         }
 
         static void Main(string[] args)
@@ -74,6 +97,7 @@
             Nuoli nuoli = new Nuoli(valittuKärki, valittuPerä, valittuPituus);
 
             Console.WriteLine($"Nuolen Kärki: {nuoli.GetKärki()}, Nuolen Perä: {nuoli.GetPerä()}, Nuolen Pituus: {nuoli.GetPituus()}cm");
+            Console.WriteLine($"Nuolen Hinta: {nuoli.LaskeHinta()} kultarahaa");
         }
     }
 }
