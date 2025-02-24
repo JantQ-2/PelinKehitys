@@ -13,7 +13,13 @@
                 Paino = paino;
                 Tilavuus = tilavuus;
             }
+
+            public override string ToString()
+            {
+                return this.GetType().Name;
+            }
         }
+
 
         public class Reppu
         {
@@ -72,7 +78,7 @@
                 {
                     foreach (var tavara in Tavarat)
                     {
-                        Console.WriteLine($" - {tavara.GetType().Name} (Paino: {tavara.Paino}, Tilavuus: {tavara.Tilavuus})");
+                        Console.WriteLine($" - {tavara}");
                     }
                 }
 
@@ -81,7 +87,17 @@
                 Console.WriteLine($"Tilavuus: {NykyinenTilavuus}/{MaxTilavuus} litraa");
                 Console.WriteLine($"Jäljellä: {JäljelläTavarat} tavaraa, {JäljelläPaino} kg, {JäljelläTilavuus} litraa\n");
             }
+
+            public override string ToString()
+            {
+                if (Tavarat.Count == 0)
+                {
+                    return "Reppu on tyhjä.";
+                }
+                return "Reppussa on seuraavat tavarat: " + string.Join(", ", Tavarat.Select(t => t.ToString()));
+            }
         }
+
 
 
 
@@ -113,10 +129,15 @@
             public Miekka() : base(5f, 3f) { }
         }
 
-        
+
         static void Main(string[] args)
         {
             Reppu reppu = new Reppu(5, 10f, 8f);
+
+            Console.WriteLine(reppu.ToString());
+            Console.WriteLine("Paina Enter jatkaaksesi...");
+            Console.ReadLine();
+
             while (true)
             {
                 Console.Clear();
@@ -129,7 +150,6 @@
                 Console.WriteLine("6. Lisää Miekka");
                 Console.WriteLine("7. Näytä reppu");
                 Console.WriteLine("8. Poistu");
-                
                 Console.Write("Valinta: ");
 
                 string valinta = Console.ReadLine();
@@ -153,12 +173,9 @@
                         Console.WriteLine("Virheellinen valinta! Paina Enter ja yritä uudelleen.");
                         Console.ReadLine();
                         continue;
-                    
                 }
-                
-                reppu.Lisää(tavara);
-                
 
+                reppu.Lisää(tavara);
                 Console.WriteLine("Paina Enter jatkaaksesi...");
                 Console.ReadLine();
             }
