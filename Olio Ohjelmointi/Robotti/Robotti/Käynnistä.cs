@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Robotti
 {
-    public class Käynnistä : RobottiKäsky
+    public class Käynnistä : IRobottiKäsky
     {
-        public override void Suorita(Robotti robotti)
+        public void Suorita(Robotti robotti)
         {
             robotti.OnKäynnissä = true;
         }
